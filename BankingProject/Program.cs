@@ -17,6 +17,11 @@ namespace BankingProject {
 			Console.WriteLine($"Account # {checking.GetNumber()}, Name: {checking.GetName()} has a balance of {checking.CheckBalance()}.");
 			savings.Deposit(350);
 			Console.WriteLine($"Account # {savings.GetNumber()}, Name: {savings.GetName()} has a balance of {savings.CheckBalance()}.");
+			savings.Transfer(340, checking);
+			Console.WriteLine($"Account # {checking.GetNumber()}, Name: {checking.GetName()} has a balance of {checking.CheckBalance()}.");
+			Console.WriteLine($"Account # {savings.GetNumber()}, Name: {savings.GetName()} has a balance of {savings.CheckBalance()}.");
+
+
 
 		}
 	}
