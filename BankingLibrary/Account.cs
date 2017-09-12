@@ -3,22 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+//^Unlike the Savings class, we don't need to add any more "using," because Account is not
+//inheriting any other classes.  Because Savings does inherit Account, there we need to use
+//"using BankingProject;"
+
 
 namespace BankingProject {
-	class Account {
+	public class Account {
+		//What the next Account number created by the program be
 		private static int nextAccountNumber = 100;
+		//How much the next Account number will be incremented by
 		private const int incrementAccountNumber = 70;
+		//A default Balance of 0 is given to an Account upon creation
 		private double Balance = 0;
+		//A default Name of "My Checking" is given to an Account, upon creation, unless another Name
+		//is specified.
 		private string Name = "My Checking";
-		private int Number = 0; //Needs to be set to a proper value yet.
-		private bool ApprovedWithdraw = true;
+		//A default Account number that nextAccountNumber is added to
+		private int Number = 0;
 
+		//Returns the current value of the double, Balance.  Balance stores how much money is in an
+		//Account.
 		public double CheckBalance() {
 			return Balance;
 		}
+		/// <summary>
+		/// This method prints the "message" to the Console.
+		/// </summary>
+		/// <param name="message"></param>
 		public void Debug(string message) {
 			Console.WriteLine(message);
 		}
+		/// <summary>
+		/// The Deposit function can be called as a stand alone method, or as part of the "Transfer" method.
+		/// In the event that the "amount" is less than or equal to zero, it passes a "message" to Debug,
+		/// and returns false.  If the "amount" is greater than zero, the "amount" is added to the "Balance,"
+		/// and the method returns true.
+		/// </summary>
+		/// <param name="amount"></param>
+		/// <returns></returns>
 		public bool Deposit(double amount) {
 			//When running an if statement like this, we could have written, IsAmountInvalid(amount) == true, but
 			//simply typing IsAmountInvalid(amount) amounts to the same thing.  Had we needed to write an if
@@ -34,6 +57,11 @@ namespace BankingProject {
 			Balance += amount;
 			return true;
 		}
+		/// <summary>
+		/// This method confirms that the "amount" > 0.
+		/// </summary>
+		/// <param name="amount"></param>
+		/// <returns></returns>
 		private bool IsAmountInvalid(double amount) {
 			if (amount > 0) {
 				return false;
@@ -42,6 +70,7 @@ namespace BankingProject {
 				return true;
 			}
 		}
+		//The next four methods are all about setting and getting the names and numbers of the account.
 		public void SetName(string name) {
 			Name = name;
 		}
@@ -54,6 +83,15 @@ namespace BankingProject {
 		public int GetNumber() {
 			return Number;
 		}
+		//Instead of calling Debug, to which we can pass any string, ToPrint is used by Account
+		//to always return a specific interpolated message to the Console when the Program calls
+		//"Console.WriteLine(account.ToPrint())"
+		//ToPrint is virtual, because Savings needs to be able to "override" ToPrint, so that Savings
+		//is able to add the IntRate to the returned string.
+		public virtual string ToPrint() {
+			return $"Account {Number}: '{Name}' has a balance of {Balance}";
+		}
+
 		public bool Transfer(double amount, Account toAccount) {
 			//In the Program example, we used savings.Transfer() to call this method.  By using this.Withdraw(),
 			//C# knows to substitute "this" with "savings." (We could also do just Withdraw(), without "this,"
@@ -75,18 +113,24 @@ namespace BankingProject {
 			if (amount > Balance) {
 				Debug($"This transaction has been cancelled, the requested withdraw {amount}");
 				Debug($"exceeded the available balance of {Balance}");
-				ApprovedWithdraw = false;
 				return false;
 			}
 			Balance -= amount;
 		return true;
 		}
 
+		//This is the substitute default Account constructor when no values are being passed to it.
+		//We need to add one of these because of the original default constructor is not added by .NET
+		//when we have the additional constructor below this one.
+		//Both constructors provide the account with a Number, and increment the value used to
+		//provide that number, making sure that each Number is unique.
 		public Account() {
 			Number = nextAccountNumber;
 			nextAccountNumber += incrementAccountNumber;
 ;
 		}
+		//When this constructor is given a name to use as the account's "Name," this constructor gets
+		//called instead of the previous.
 		public Account(string name) {
 			Name = name;
 			Number = nextAccountNumber;

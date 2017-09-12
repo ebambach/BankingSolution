@@ -5,3 +5,5 @@ C:\Repos\BankingSolution\BankingProject\obj\Debug\BankingProject.csprojResolveAs
 C:\Repos\BankingSolution\BankingProject\obj\Debug\BankingProject.csproj.CoreCompileInputs.cache
 C:\Repos\BankingSolution\BankingProject\obj\Debug\BankingProject.exe
 C:\Repos\BankingSolution\BankingProject\obj\Debug\BankingProject.pdb
+C:\repos\BankingSolution\BankingProject\bin\Debug\BankingLibrary.dll
+C:\repos\BankingSolution\BankingProject\bin\Debug\BankingLibrary.pdb
