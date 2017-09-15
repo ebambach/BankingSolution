@@ -15,7 +15,7 @@ namespace BankingProject {
 		//How much the next Account number will be incremented by
 		private const int incrementAccountNumber = 70;
 		//A default Balance of 0 is given to an Account upon creation
-		private double Balance = 0;
+		protected double Balance = 0;
 		//A default Name of "My Checking" is given to an Account, upon creation, unless another Name
 		//is specified.
 		private string Name = "My Checking";
